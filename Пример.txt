@@ -1,0 +1,42 @@
+	            if (!connected)
+	            {
+	                var form = new StartConnectionForm
+	                {
+	                    Server = dbServer,
+	                    Catalog = dbCatalog,
+	                    Trusted = dbTrusted,
+	                    UserName = dbUserName,
+	                    Password = dbPassword,
+	                    IsSave = isSave,
+	                    IsExtOptions = isExtOptionsStartForm
+	                };
+	                form.TopMost = true;
+
+                    MessageBox.Show("Тестирование 1", dbServer,
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Information,
+                                                MessageBoxDefaultButton.Button1,
+                                                MessageBoxOptions.DefaultDesktopOnly);
+
+                    if (form.ShowDialogExt(this) != DialogResult.OK)
+	                {
+	                    Application.Exit();
+	                    return;
+	                }
+                    dbServer = form.Server;
+	                dbCatalog = form.Catalog;
+	                dbTrusted = form.Trusted;
+	                dbUserName = form.UserName;
+	                dbPassword = form.Password;
+	                isSave = form.IsSave;
+	                isSavePassowrd = form.IsSavePassword;
+
+                    MessageBox.Show("Тестирование 2", dbPassword,
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Information,
+                                                MessageBoxDefaultButton.Button1,
+                                                MessageBoxOptions.DefaultDesktopOnly); _isLoadingDataFromDataBase = true;
+
+                    form.Dispose();
+	                form = null;
+	            }
