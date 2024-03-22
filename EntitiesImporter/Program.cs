@@ -1,4 +1,8 @@
-﻿using System;
+﻿using System.Data;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,12 +20,17 @@ namespace EntitiesImporter
         {
             string[] args = Environment.GetCommandLineArgs();
             string ServerName = args[1];
-            string BaseName = args[2];
+            string DataBaseName = args[2];
             string PodCast = args[3];
+            string connectionString = "Server=(" + ServerName + ")\\mssqllocaldb;Database=" + DataBaseName + "; Trusted_Connection=True;";
 
             Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-            if (PodCast == "Contract") Application.Run(new ContractImportForm());
+            if (PodCast == "Contract")
+            {
+                var ContractImportForm = new ContractImportForm(connectionString);
+                Application.Run(ContractImportForm);
+            }
             else MessageBox.Show("Функция " + PodCast + " не реализована", "Импорт сущностей в ПК OmniUS");
 		}
 	}
